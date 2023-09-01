@@ -6,13 +6,22 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^1.0.6",
+    "@hookform/error-message": "^2.0.1",
     "@supabase/auth-helpers-nextjs": "latest",
     "@supabase/supabase-js": "latest",
+    "@tanstack/react-query": "^4.33.0",
+    "@types/lodash": "^4.14.197",
     "autoprefixer": "10.4.14",
+    "date-fns": "^2.30.0",
+    "lodash": "^4.17.21",
     "next": "latest",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
+    "tailwind-datepicker-react": "^1.4.2",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.3"
   },
