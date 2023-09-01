@@ -5,6 +5,7 @@ import DatepickerComponent from "../DatepickerComponent";
 import { InputHTMLAttributes, useEffect, useState } from "react";
 import InputText from "../form/InputText";
 import { OtherInputProps } from "@/models/components/other-input-props";
+import { format } from "date-fns";
 
 export type InputDatepickerProps = InputHTMLAttributes<HTMLInputElement> &
   OtherInputProps;
@@ -16,7 +17,7 @@ export default function BookingDatepicker(props: InputDatepickerProps) {
 
   useEffect(() => {
     if (!setValue || !name) return;
-    setValue(name, date.toISOString().split("T")[0]);
+    setValue(name, format(date, "yyyy-MM-dd"));
   }, [date]);
 
   return (

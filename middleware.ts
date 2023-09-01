@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 import type { NextRequest } from "next/server";
 
-const protectedRoute = ["/confirm-booking"];
+const protectedRoute = ["/booking/confirm", "/room"];
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();

@@ -27,7 +27,12 @@ const navigation: NavigationMenu[] = [
   },
   {
     name: "Confirm Booking",
-    redirect: "/confirm-booking",
+    redirect: "/booking/confirm",
+    authenticated: true,
+  },
+  {
+    name: "Create Room",
+    redirect: "/room",
     authenticated: true,
   },
 ];

@@ -18,6 +18,7 @@ export type BookingFormProps = {
 
 export default function BookingForm({ rooms }: { rooms: any[] }) {
   const handleCreateBookingForm = async (data: BookingFormProps) => {
+    console.log(data);
     setLoading(true);
     await createBooking(data);
     setLoading(false);
