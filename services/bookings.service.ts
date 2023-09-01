@@ -14,9 +14,34 @@ const getBookings = async (date: Date): Promise<Booking[] | null> => {
   return data;
 };
 
+const getPendingBookings = async (): Promise<Booking[] | null> => {
+  const { data } = await supabase
+    .from("bookings")
+    .select(`*, rooms (id, name)`)
+    .is("accepted_by", null);
+
+  return data;
+};
+
 const createBooking = async (data: BookingFormProps) => {
   const { error } = await supabase.from("bookings").insert(data);
   return error?.message;
-}
+};
 
-export { getBookings, createBooking };
+const deleteBooking = async (bookingId: string) => {
+  const { error } = await supabase
+    .from("bookings")
+    .delete()
+    .eq("id", bookingId);
+  return error?.message;
+};
+
+const acceptBooking = async (bookingId: string, userId: string) => {
+  const { error } = await supabase
+    .from("bookings")
+    .update({ accepted_by: userId })
+    .eq("id", bookingId);
+  return error?.message;
+};
+
+export { getBookings, createBooking, deleteBooking, acceptBooking, getPendingBookings };

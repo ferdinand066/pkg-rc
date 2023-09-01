@@ -7,6 +7,10 @@ export const dynamic = "force-dynamic";
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  
   const currentDate = new Date();
   const { data: rooms } = await supabase.from("rooms").select();
   const { data: bookings } = await supabase
@@ -15,7 +19,7 @@ export default async function Index() {
     .eq("booking_date", currentDate.toISOString().split("T")[0]);
 
   return (
-    <Layout title="Home">
+    <Layout title="Home" user={user}>
       <div className="flex flex-col gap-4 py-4">
         {rooms && (
           <RoomAvailability
