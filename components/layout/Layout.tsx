@@ -2,11 +2,13 @@
 
 import { classJoin } from "@/lib/utils";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type NavigationMenu = {
   name: string;
@@ -184,6 +186,7 @@ export default function Layout({ children, title, user }: any) {
           {children}
         </div>
       </div>
+      <ToastContainer />
     </QueryClientProvider>
   );
 }

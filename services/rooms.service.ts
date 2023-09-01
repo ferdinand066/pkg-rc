@@ -10,7 +10,8 @@ const getRooms = async () => {
 
 const createRoom = async (data: RoomFormProps) => {
   const { error } = await supabase.from("rooms").insert(data);
-  return error?.message;
+  if (error) throw new Error(error.message);
+  return "Successfully create new room!";
 };
 
 export { getRooms, createRoom };

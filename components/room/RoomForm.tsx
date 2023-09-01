@@ -6,6 +6,8 @@ import InputText from "../form/InputText";
 import SubmitButtonGroup from "../form/SubmitButtonGroup";
 import { createRoom } from "@/services/rooms.service";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { handleToastError, handleToastSuccess } from "@/lib/utils";
 
 export type RoomFormProps = {
   name: string,
@@ -15,11 +17,18 @@ export type RoomFormProps = {
 export default function RoomForm() {
   const handleCreateRoomForm = async (data: RoomFormProps) => {
     setLoading(true);
-    await createRoom(data);
+    try {
+      await toast.promise(createRoom(data), {
+        pending: "Creating new room!",
+        success: handleToastSuccess(),
+        error: handleToastError(),
+      });
+      reset();
+      queryClient.invalidateQueries({ queryKey: ["rooms"] });
+      queryClient.invalidateQueries({ queryKey: ["booking"] });
+    } catch (e) {}
+
     setLoading(false);
-    reset();
-    queryClient.invalidateQueries({queryKey: ['rooms']});
-    queryClient.invalidateQueries({queryKey: ['booking']});
   }
   
   const {

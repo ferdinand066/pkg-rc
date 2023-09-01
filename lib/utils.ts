@@ -15,4 +15,21 @@ const getErrorValue = (name: string, errors: any) => {
   return true;
 };
 
-export { getErrorValue, classJoin }
+const handleToastError = () => {
+  return {
+    render({ data }: any) {
+      return (<Error>data)!.message;
+    },
+  };
+};
+
+const handleToastSuccess = () => {
+  return {
+    render({ data }: any) {
+      return data;
+    },
+  };
+};
+
+
+export { getErrorValue, classJoin, handleToastError, handleToastSuccess }

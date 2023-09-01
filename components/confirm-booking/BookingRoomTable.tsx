@@ -4,9 +4,16 @@ import Booking from "@/models/booking";
 import Table from "../Table";
 import { format } from "date-fns";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";
-import { acceptBooking, deleteBooking, getPendingBookings } from "@/services/bookings.service";
+import {
+  acceptBooking,
+  deleteBooking,
+  getPendingBookings,
+} from "@/services/bookings.service";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { handleToastError, handleToastSuccess } from "@/lib/utils";
 
+const queryKey = "confirm-bookings";
 
 export default function BookingRoomTable({
   initialBookings,
@@ -18,19 +25,31 @@ export default function BookingRoomTable({
   const queryClient = useQueryClient();
 
   const { data: bookings } = useQuery({
-    queryKey: ["confirm-bookings"],
+    queryKey: [queryKey],
     queryFn: getPendingBookings,
     initialData: initialBookings,
   });
 
   const handleAcceptBooking = async (bookingId: string, userId: string) => {
-    await acceptBooking(bookingId, userId);
-    queryClient.invalidateQueries({ queryKey: ["confirm-bookings"] });
+    try {
+      await toast.promise(acceptBooking(bookingId, userId), {
+        pending: "Waiting for accept booking request!",
+        success: handleToastSuccess(),
+        error: handleToastError(),
+      });
+      queryClient.invalidateQueries({ queryKey: [queryKey] });
+    } catch (e) {}
   };
 
   const handleDeclineBooking = async (bookingId: string) => {
-    await deleteBooking(bookingId);
-    queryClient.invalidateQueries({ queryKey: ["confirm-bookings"] });
+    try {
+      await toast.promise(deleteBooking(bookingId), {
+        pending: "Waiting for delete booking request!",
+        success: handleToastSuccess(),
+        error: handleToastError(),
+      });
+      queryClient.invalidateQueries({ queryKey: [queryKey] });
+    } catch (e) {}
   };
 
   const generateTableData = (bookings: Booking[], userId: string) => {

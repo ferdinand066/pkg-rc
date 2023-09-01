@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useForm } from "react-hook-form";
 import InputText from "../form/InputText";
@@ -7,13 +7,15 @@ import BookingDatepicker from "./BookingDatepicker";
 import { createBooking } from "@/services/bookings.service";
 import { useState } from "react";
 import InputSelect from "../form/InputSelect";
+import { toast } from "react-toastify";
+import { handleToastError, handleToastSuccess } from "@/lib/utils";
 
 export type BookingFormProps = {
   room_id: string;
   booked_by: string;
   booking_date: Date;
-  booking_start: Date;
-  booking_end: Date;
+  booking_start: string;
+  booking_end: string;
 };
 
 export default function BookingForm({ rooms }: { rooms: any[] }) {
@@ -22,13 +24,20 @@ export default function BookingForm({ rooms }: { rooms: any[] }) {
       ...data,
       accepted_by: null,
     };
-    
+
     setLoading(true);
-    await createBooking(payload);
+    try {
+      await toast.promise(createBooking(payload), {
+        pending: "Create booking request!",
+        success: handleToastSuccess(),
+        error: handleToastError()
+      });
+    } catch (e) {}
+
     setLoading(false);
     reset();
-  }
-  
+  };
+
   const {
     register,
     handleSubmit,
