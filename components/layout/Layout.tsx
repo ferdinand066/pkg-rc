@@ -166,17 +166,19 @@ export default function Layout({ children, title, user }: any) {
                     );
                   })}
                 </div>
-                <div className="py-1 border-t border-gray-200 ">
-                  <form
-                    className="space-y-1"
-                    action="/auth/sign-out"
-                    method="post"
-                  >
-                    <button className="block w-full px-4 py-2 text-base font-medium text-left text-gray-500 hover:text-gray-800 hover:bg-gray-100">
-                      Sign out
-                    </button>
-                  </form>
-                </div>
+                {user && (
+                  <div className="py-1 border-t border-gray-200 ">
+                    <form
+                      className="space-y-1"
+                      action="/auth/sign-out"
+                      method="post"
+                    >
+                      <button className="block w-full px-4 py-2 text-base font-medium text-left text-gray-500 hover:text-gray-800 hover:bg-gray-100">
+                        Sign out
+                      </button>
+                    </form>
+                  </div>
+                )}
               </Disclosure.Panel>
             </>
           )}
