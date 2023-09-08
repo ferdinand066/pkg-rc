@@ -49,7 +49,7 @@ export default function RoomForm() {
       method="POST"
       onSubmit={handleSubmit(handleCreateRoomForm)}
     >
-      <div className="grid items-center grid-cols-4">
+      <div className="grid items-center grid-cols-1 sm:grid-cols-4">
         <InputText
           label="Room Name"
           id="name"
@@ -62,7 +62,7 @@ export default function RoomForm() {
           errors={errors}
         />
       </div>
-      <div className="grid items-center grid-cols-4">
+      <div className="grid items-center grid-cols-1 sm:grid-cols-4">
         <InputText
           label="Room Capacity"
           id="capacity"
@@ -76,7 +76,7 @@ export default function RoomForm() {
           errors={errors}
         />
       </div>
-      <div className="flex flex-col justify-end gap-4 sm:flex-row">
+      <div className="flex flex-col justify-end gap-2 sm:gap-4 sm:flex-row">
         <SubmitButtonGroup text="Create" reset={reset} loading={loading} />
       </div>
     </form>

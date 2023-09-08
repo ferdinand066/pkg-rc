@@ -55,7 +55,7 @@ export default function BookingForm({ rooms }: { rooms: any[] }) {
       method="POST"
       onSubmit={handleSubmit(handleCreateBookingForm)}
     >
-      <div className="grid items-center grid-cols-4">
+      <div className="grid items-center grid-cols-1 sm:grid-cols-4">
         <InputSelect
           label="Room"
           id="room_id"
@@ -68,7 +68,7 @@ export default function BookingForm({ rooms }: { rooms: any[] }) {
           errors={errors}
         />
       </div>
-      <div className="grid items-center grid-cols-4">
+      <div className="grid items-center grid-cols-1 sm:grid-cols-4">
         <InputText
           label="Booked By"
           id="booked_by"
@@ -81,7 +81,7 @@ export default function BookingForm({ rooms }: { rooms: any[] }) {
           errors={errors}
         />
       </div>
-      <div className="grid items-center grid-cols-4">
+      <div className="grid items-center grid-cols-1 sm:grid-cols-4">
         <BookingDatepicker
           label="Booking Date"
           id="booking_date"
@@ -93,7 +93,7 @@ export default function BookingForm({ rooms }: { rooms: any[] }) {
           errors={errors}
         />
       </div>
-      <div className="grid items-center grid-cols-4">
+      <div className="grid items-center grid-cols-1 sm:grid-cols-4">
         <InputText
           label="Booking Start"
           id="booking_start"
@@ -106,7 +106,7 @@ export default function BookingForm({ rooms }: { rooms: any[] }) {
           errors={errors}
         />
       </div>
-      <div className="grid items-center grid-cols-4">
+      <div className="grid items-center grid-cols-1 sm:grid-cols-4">
         <InputText
           label="Booking End"
           id="booking_end"
@@ -124,7 +124,7 @@ export default function BookingForm({ rooms }: { rooms: any[] }) {
           errors={errors}
         />
       </div>
-      <div className="flex flex-col justify-end gap-4 sm:flex-row">
+      <div className="flex flex-col justify-end gap-2 sm:gap-4 sm:flex-row">
         <SubmitButtonGroup text="Create" reset={reset} loading={loading} />
       </div>
     </form>
